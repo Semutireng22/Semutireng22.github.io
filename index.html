@@ -7,19 +7,19 @@
   <meta name="description" content="Web3 developer portfolio: dApps, automation tools, and blockchain utilities on EVM & Monad Testnet.">
   <meta name="keywords" content="Web3, blockchain, dApp, portfolio, Monad, CLI, automation, Python, Node.js">
   <meta name="author" content="Slamet Wibowo">
-  <link rel="canonical" href="https://yourusername.github.io/">
+  <link rel="canonical" href="https://semutireng22.github.io/">
 
-  <!-- OpenGraph -->
+  <!-- OpenGraph (SVG placeholder, always available) -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Slamet Wibowo — Web3 Developer Portfolio">
   <meta property="og:description" content="dApps, automation tools, blockchain utilities.">
   <meta property="og:image" content="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='630'><rect width='100%' height='100%' fill='%2310182a'/><text x='50%' y='52%' dominant-baseline='middle' text-anchor='middle' fill='%23a5b4fc' font-family='Arial' font-size='48'>Slamet Wibowo — Web3 Developer</text></svg>">
-  <meta property="og:url" content="https://yourusername.github.io/">
+  <meta property="og:url" content="https://semutireng22.github.io/">
   <meta name="twitter:card" content="summary_large_image">
 
   <!-- Schema -->
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Person","name":"Slamet Wibowo","url":"https://yourusername.github.io/","sameAs":["https://github.com/Semutireng22","https://x.com/yourhandle","https://www.linkedin.com/in/yourhandle"],"jobTitle":"Web3 Developer"}
+  {"@context":"https://schema.org","@type":"Person","name":"Slamet Wibowo","url":"https://semutireng22.github.io/","sameAs":["https://github.com/Semutireng22","https://t.me/jodohsaya","mailto:slametwibowo1922@gmail.com"],"jobTitle":"Web3 Developer"}
   </script>
 
   <!-- Fonts & Icons -->
@@ -28,6 +28,7 @@
 
   <!-- CSS libs -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" rel="stylesheet"/>
 
   <style>
     :root{
@@ -40,8 +41,10 @@
       --soft-shadow: 0 12px 36px rgba(0,0,0,.10);
       --ring: 0 0 0 6px rgba(79,70,229,.14);
     }
-    html, body{scroll-behavior:smooth}
-    body{font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif; background: var(--bg-grad); background-attachment: fixed;}
+    body{
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+      background: var(--bg-grad); background-attachment: fixed;
+    }
     [data-bs-theme="dark"] body{ background: var(--bg-grad-dark); color:#cdd6f4; }
 
     .navbar-blur{
@@ -61,11 +64,12 @@
       border: var(--glass-border);
       box-shadow: var(--soft-shadow);
       backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-      border-radius: 18px; will-change: transform, box-shadow;
+      border-radius: 18px; will-change: transform, box-shadow; transform: translateZ(0);
     }
     [data-bs-theme="dark"] .glass{ background: var(--card-bg-dark); border: var(--glass-border-dark); }
 
     .hero{ position: relative; z-index:1; padding-top: 7rem; padding-bottom: 4rem; }
+
     .blob, .blob-2{
       position:absolute; width:46vw; height:46vw; max-width:700px; max-height:700px; filter: blur(50px);
       pointer-events:none; z-index:0; transform: translate3d(0,0,0);
@@ -85,7 +89,13 @@
     .btn-primary.btn-soft{ box-shadow: var(--ring); }
     .btn-outline-secondary.btn-soft:hover{ box-shadow: 0 6px 20px rgba(15,23,42,.12); }
 
-    /* Project grid image area uses inline SVG; keep height consistent */
+    /* Work slider sizing (consistent across breakpoints) */
+    .work-swiper{ padding: 12px 4px 40px; }
+    .work-swiper .swiper-slide{
+      height: auto; display: flex;
+    }
+    .project-card{ width:100%; transition: transform .25s ease, box-shadow .25s ease; backface-visibility: hidden; }
+    .project-card:hover{ transform: translateY(-4px); box-shadow: 0 16px 44px rgba(0,0,0,.14); }
     .thumb{
       width:100%; height:220px; border-radius: 14px; overflow:hidden;
       display:flex; align-items:center; justify-content:center;
@@ -93,9 +103,9 @@
     }
     [data-bs-theme="dark"] .thumb{ background: linear-gradient(135deg, rgba(30,41,59,.55), rgba(2,6,23,.65)); }
     svg{ width:88%; height:88%; }
+    @media (min-width: 768px){ .thumb{ height:240px; } }
+    @media (min-width: 1200px){ .thumb{ height:260px; } }
 
-    .project-card{ transition: transform .25s ease, box-shadow .25s ease; }
-    .project-card:hover{ transform: translateY(-4px); box-shadow: 0 16px 44px rgba(0,0,0,.14); }
     .badge-soft{ background: rgba(99,102,241,.12); color:#4f46e5; }
     [data-bs-theme="dark"] .badge-soft{ background: rgba(99,102,241,.18); color:#a5b4fc; }
 
@@ -106,8 +116,9 @@
     .typing::after{ content:'|'; margin-left:2px; animation: blink .9s steps(1) infinite; }
     @keyframes blink{ 50%{ opacity:0; } }
 
+    /* Respect reduced motion */
     @media (prefers-reduced-motion: reduce){
-      *{ animation: none !important; transition: none !important; scroll-behavior: auto !important;}
+      *{ animation: none !important; transition: none !important;}
     }
   </style>
 </head>
@@ -118,6 +129,10 @@
   <nav class="navbar navbar-expand-lg fixed-top navbar-blur">
     <div class="container">
       <a class="navbar-brand fw-bold" href="#top">Slamet Wibowo</a>
+      <div class="d-none d-lg-flex align-items-center small me-3">
+        <a href="https://t.me/jodohsaya" class="text-decoration-none me-3" target="_blank" rel="noopener"><i class="bi bi-telegram me-1"></i>@jodohsaya</a>
+        <a href="mailto:slametwibowo1922@gmail.com" class="text-decoration-none"><i class="bi bi-envelope me-1"></i>slametwibowo1922@gmail.com</a>
+      </div>
       <div class="d-flex align-items-center gap-2">
         <button id="themeToggle" class="btn btn-outline-secondary btn-sm btn-soft" aria-label="Toggle theme"><i class="bi bi-moon-stars"></i></button>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav1" aria-controls="nav1" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
@@ -142,40 +157,417 @@
         <p class="lead muted mb-0" id="hero-sub">
           I build elegant Web3 utilities and smooth, production-ready dApps. Focused on EVM integrations, testnet prototyping, and developer tooling (bots/scripts). Portfolio includes deployed dApps on Monad Testnet and an npm CLI.
         </p>
+        <div class="mt-3">
+          <a href="https://t.me/jodohsaya" target="_blank" rel="noopener" class="btn btn-outline-secondary btn-soft me-2"><i class="bi bi-telegram me-1"></i>@jodohsaya</a>
+          <a href="mailto:slametwibowo1922@gmail.com" class="btn btn-outline-secondary btn-soft"><i class="bi bi-envelope me-1"></i>Email</a>
+        </div>
       </div>
     </div>
   </header>
 
-  <!-- Work & Open-Source (GRID ONLY, no slider) -->
+  <!-- Work & Open-Source (SLIDER with 3D coverflow) -->
   <section id="work" class="section">
     <div class="container">
-      <h2 class="section-title mb-4">Work & Open-Source</h2>
-      <p class="muted mb-4">Deployed applications, infrastructure utilities, and developer tools. Visuals are SVG inline, curated to be relevant and always available.</p>
+      <h2 class="section-title mb-3">Work & Open-Source</h2>
+
+      <div class="swiper work-swiper">
+        <div class="swiper-wrapper">
+
+          <!-- Monflipcoin -->
+          <div class="swiper-slide">
+            <div class="card glass project-card" data-tilt data-tilt-max="8" data-tilt-glare="true" data-tilt-max-glare=".12">
+              <div class="thumb" aria-label="Coinflip dApp illustration">
+                <svg viewBox="0 0 200 200" role="img" aria-label="Coinflip blockchain">
+                  <defs><linearGradient id="g1" x1="0" x2="1" y1="0" y2="1"><stop offset="0%" stop-color="#a5b4fc"/><stop offset="100%" stop-color="#67e8f9"/></linearGradient></defs>
+                  <circle cx="60" cy="100" r="34" fill="url(#g1)"/>
+                  <circle cx="130" cy="100" r="34" fill="#e2e8f0" stroke="#94a3b8" stroke-width="3"/>
+                  <rect x="20" y="40" width="160" height="16" rx="8" fill="#cbd5e1"/>
+                  <rect x="20" y="144" width="160" height="16" rx="8" fill="#cbd5e1"/>
+                  <line x1="60" y1="66" x2="60" y2="134" stroke="#94a3b8" stroke-width="4"/>
+                  <line x1="130" y1="66" x2="130" y2="134" stroke="#94a3b8" stroke-width="4"/>
+                </svg>
+              </div>
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-start">
+                  <h5 class="card-title mb-1">Monflipcoin</h5>
+                  <span class="badge rounded-pill badge-soft">Monad</span>
+                </div>
+                <p class="card-text muted">Coinflip dApp on Monad Testnet with smart contract integration.</p>
+                <div class="d-flex gap-2">
+                  <a href="https://monflipcoin.vercel.app/" class="btn btn-sm btn-primary btn-soft" target="_blank" rel="noopener">Live</a>
+                  <a href="https://github.com/Semutireng22/monflipcoin" class="btn btn-sm btn-outline-secondary" target="_blank" rel="noopener">GitHub</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Monracer -->
+          <div class="swiper-slide">
+            <div class="card glass project-card" data-tilt data-tilt-max="8" data-tilt-glare="true" data-tilt-max-glare=".12">
+              <div class="thumb" aria-label="Typing race illustration">
+                <svg viewBox="0 0 200 200" role="img" aria-label="Typing speed">
+                  <rect x="20" y="60" width="160" height="80" rx="10" fill="#e2e8f0" stroke="#94a3b8" stroke-width="3"/>
+                  <g fill="#cbd5e1">
+                    <rect x="35" y="75" width="25" height="15" rx="3"/>
+                    <rect x="65" y="75" width="25" height="15" rx="3"/>
+                    <rect x="95" y="75" width="25" height="15" rx="3"/>
+                    <rect x="125" y="75" width="25" height="15" rx="3"/>
+                    <rect x="35" y="95" width="35" height="15" rx="3"/>
+                    <rect x="75" y="95" width="35" height="15" rx="3"/>
+                    <rect x="115" y="95" width="35" height="15" rx="3"/>
+                  </g>
+                  <path d="M20 150 Q100 120 180 150" stroke="#a5b4fc" stroke-width="6" fill="none"/>
+                </svg>
+              </div>
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-start">
+                  <h5 class="card-title mb-1">Monracer</h5>
+                  <span class="badge rounded-pill badge-soft">Monad</span>
+                </div>
+                <p class="card-text muted">Typing speed racing game deployed on Monad Testnet.</p>
+                <div class="d-flex gap-2">
+                  <a href="https://monracer.vercel.app/" class="btn btn-sm btn-primary btn-soft" target="_blank" rel="noopener">Live</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Monad MCP -->
+          <div class="swiper-slide">
+            <div class="card glass project-card" data-tilt data-tilt-max="8" data-tilt-glare="true" data-tilt-max-glare=".12">
+              <div class="thumb" aria-label="Server infra illustration">
+                <svg viewBox="0 0 200 200" role="img" aria-label="Server infrastructure">
+                  <rect x="40" y="30" width="120" height="140" rx="10" fill="#e2e8f0" stroke="#94a3b8" stroke-width="3"/>
+                  <g fill="#cbd5e1">
+                    <rect x="55" y="45" width="90" height="12" rx="2"/>
+                    <rect x="55" y="66" width="90" height="12" rx="2"/>
+                    <rect x="55" y="87" width="90" height="12" rx="2"/>
+                    <rect x="55" y="108" width="90" height="12" rx="2"/>
+                    <rect x="55" y="129" width="90" height="12" rx="2"/>
+                  </g>
+                  <circle cx="70" cy="155" r="4" fill="#22d3ee"/>
+                  <circle cx="85" cy="155" r="4" fill="#a78bfa"/>
+                  <circle cx="100" cy="155" r="4" fill="#38bdf8"/>
+                </svg>
+              </div>
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-start">
+                  <h5 class="card-title mb-1">Monad MCP Server</h5>
+                  <span class="badge rounded-pill badge-soft">Infra</span>
+                </div>
+                <p class="card-text muted">MCP server for blockchain queries; integrates with Claude Desktop.</p>
+                <div class="d-flex gap-2">
+                  <a href="https://github.com/Semutireng22/mcp-monad" class="btn btn-sm btn-outline-secondary" target="_blank" rel="noopener">GitHub</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Grass Mining -->
+          <div class="swiper-slide">
+            <div class="card glass project-card" data-tilt data-tilt-max="8" data-tilt-glare="true" data-tilt-max-glare=".12">
+              <div class="thumb" aria-label="Automation mining illustration">
+                <svg viewBox="0 0 200 200" role="img" aria-label="Automation network">
+                  <circle cx="40" cy="100" r="10" fill="#22d3ee"/>
+                  <circle cx="100" cy="60" r="10" fill="#a78bfa"/>
+                  <circle cx="160" cy="100" r="10" fill="#38bdf8"/>
+                  <circle cx="100" cy="140" r="10" fill="#67e8f9"/>
+                  <line x1="40" y1="100" x2="100" y2="60" stroke="#94a3b8" stroke-width="3"/>
+                  <line x1="100" y1="60" x2="160" y2="100" stroke="#94a3b8" stroke-width="3"/>
+                  <line x1="160" y1="100" x2="100" y2="140" stroke="#94a3b8" stroke-width="3"/>
+                  <line x1="100" y1="140" x2="40" y2="100" stroke="#94a3b8" stroke-width="3"/>
+                </svg>
+              </div>
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-start">
+                  <h5 class="card-title mb-1">Grass Mining Tool</h5>
+                  <span class="badge rounded-pill badge-soft">Solana</span>
+                </div>
+                <p class="card-text muted">Automation for Grass mining activity on Solana.</p>
+                <div class="d-flex gap-2">
+                  <a href="https://github.com/Semutireng22/grass-minning" class="btn btn-sm btn-outline-secondary" target="_blank" rel="noopener">GitHub</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ethereum OS CLI -->
+          <div class="swiper-slide">
+            <div class="card glass project-card" data-tilt data-tilt-max="8" data-tilt-glare="true" data-tilt-max-glare=".12">
+              <div class="thumb" aria-label="CLI terminal illustration">
+                <svg viewBox="0 0 200 200" role="img" aria-label="Command line interface">
+                  <rect x="20" y="50" width="160" height="100" rx="8" fill="#0f172a" stroke="#94a3b8" stroke-width="3"/>
+                  <circle cx="36" cy="64" r="4" fill="#ef4444"/>
+                  <circle cx="48" cy="64" r="4" fill="#f59e0b"/>
+                  <circle cx="60" cy="64" r="4" fill="#22c55e"/>
+                  <text x="34" y="92" fill="#a5b4fc" font-family="monospace" font-size="14">&gt; ethos --help</text>
+                  <text x="34" y="112" fill="#67e8f9" font-family="monospace" font-size="12">A CLI for Ethereum OS</text>
+                </svg>
+              </div>
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-start">
+                  <h5 class="card-title mb-1">Ethereum OS CLI</h5>
+                  <span class="badge rounded-pill badge-soft">CLI</span>
+                </div>
+                <p class="card-text muted">npm package for interacting with Ethereum OS.</p>
+                <div class="d-flex gap-2">
+                  <a href="https://www.npmjs.com/package/ethereumos?activeTab=code" class="btn btn-sm btn-primary btn-soft" target="_blank" rel="noopener">npm</a>
+                  <a href="https://ethos.vision" class="btn btn-sm btn-outline-secondary" target="_blank" rel="noopener">Website</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Automation Utilities -->
+          <div class="swiper-slide">
+            <div class="card glass project-card" data-tilt data-tilt-max="8" data-tilt-glare="true" data-tilt-max-glare=".12">
+              <div class="thumb" aria-label="Automation utilities illustration">
+                <svg viewBox="0 0 200 200" role="img" aria-label="Automation utilities">
+                  <g fill="#cbd5e1" stroke="#94a3b8" stroke-width="3">
+                    <circle cx="80" cy="100" r="26"/>
+                    <circle cx="130" cy="120" r="18"/>
+                  </g>
+                  <circle cx="80" cy="100" r="10" fill="#a5b4fc"/>
+                  <circle cx="130" cy="120" r="7" fill="#67e8f9"/>
+                  <rect x="40" y="60" width="120" height="8" rx="4" fill="#a5b4fc" opacity=".4"/>
+                </svg>
+              </div>
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-start">
+                  <h5 class="card-title mb-1">Automation Utilities</h5>
+                  <span class="badge rounded-pill badge-soft">Tools</span>
+                </div>
+                <p class="card-text muted">Bots/scripts for workflow optimization and testnet participation.</p>
+                <div class="d-flex gap-2">
+                  <a href="https://github.com/Semutireng22?tab=repositories" class="btn btn-sm btn-outline-secondary" target="_blank" rel="noopener">Explore</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- Controls -->
+        <div class="swiper-pagination"></div>
+        <div class="swiper-scrollbar"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills (animated infographic) -->
+  <section id="skills" class="section">
+    <div class="container">
+      <h2 class="section-title mb-4">Skills & Stack</h2>
 
       <div class="row g-3 g-md-4">
-        <!-- Monflipcoin -->
-        <div class="col-md-6 col-lg-4">
-          <div class="card glass project-card h-100" data-tilt data-tilt-max="8" data-tilt-glare="true" data-tilt-max-glare=".12">
-            <div class="thumb" aria-label="Coinflip dApp illustration">
-              <!-- Coins / blockchain -->
-              <svg viewBox="0 0 200 200" role="img" aria-label="Coinflip blockchain">
-                <defs>
-                  <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1">
-                    <stop offset="0%" stop-color="#a5b4fc"/><stop offset="100%" stop-color="#67e8f9"/>
-                  </linearGradient>
-                </defs>
-                <circle cx="60" cy="100" r="34" fill="url(#g1)"/>
-                <circle cx="130" cy="100" r="34" fill="#e2e8f0" stroke="#94a3b8" stroke-width="3"/>
-                <rect x="20" y="40" width="160" height="16" rx="8" fill="#cbd5e1"/>
-                <rect x="20" y="144" width="160" height="16" rx="8" fill="#cbd5e1"/>
-                <line x1="60" y1="66" x2="60" y2="134" stroke="#94a3b8" stroke-width="4"/>
-                <line x1="130" y1="66" x2="130" y2="134" stroke="#94a3b8" stroke-width="4"/>
-              </svg>
+        <div class="col-lg-7">
+          <div class="glass p-4 h-100">
+            <!-- Animated bars + count up -->
+            <div class="mb-3">
+              <div class="d-flex justify-content-between"><span>Python</span><span class="muted"><span class="num" data-target="90">0</span>%</span></div>
+              <div class="progress" role="progressbar" aria-label="Python" aria-valuemin="0" aria-valuemax="100">
+                <div class="progress-bar" style="width:0%"></div>
+              </div>
             </div>
-            <div class="card-body">
-              <div class="d-flex justify-content-between align-items-start">
-                <h5 class="card-title mb-1">Monflipcoin</h5>
-                <span class="badge rounded-pill badge-soft">Monad</span>
+            <div class="mb-3">
+              <div class="d-flex justify-content-between"><span>Node.js</span><span class="muted"><span class="num" data-target="85">0</span>%</span></div>
+              <div class="progress"><div class="progress-bar" style="width:0%"></div></div>
+            </div>
+            <div class="mb-3">
+              <div class="d-flex justify-content-between"><span>dApps (EVM/Wallet Integration)</span><span class="muted"><span class="num" data-target="88">0</span>%</span></div>
+              <div class="progress"><div class="progress-bar" style="width:0%"></div></div>
+            </div>
+            <div class="mb-3">
+              <div class="d-flex justify-content-between"><span>Automation Tools (bots/scripts)</span><span class="muted"><span class="num" data-target="92">0</span>%</span></div>
+              <div class="progress"><div class="progress-bar" style="width:0%"></div></div>
+            </div>
+            <div>
+              <div class="d-flex justify-content-between"><span>Docs & Community</span><span class="muted"><span class="num" data-target="80">0</span>%</span></div>
+              <div class="progress"><div class="progress-bar" style="width:0%"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-5">
+          <div class="glass p-4 h-100" data-tilt data-tilt-max="6">
+            <h6 class="text-uppercase text-muted small mb-3">Toolbox</h6>
+            <ul class="mb-0">
+              <li>Languages: Python, JavaScript, TypeScript</li>
+              <li>Runtime: Node.js, Bun</li>
+              <li>Web3: EVM/RPC, Wallet Integrations, Testnets</li>
+              <li>Frontend: Bootstrap, Next.js (basic), Vercel</li>
+              <li>Dev: GitHub, npm, Notion</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="section">
+    <div class="container">
+      <h2 class="section-title mb-4">Contact</h2>
+      <div class="row g-3 g-md-4">
+        <div class="col-lg-7">
+          <div class="glass p-4" data-tilt data-tilt-max="6">
+            <form action="https://formspree.io/f/your-id" method="POST">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label">Name</label>
+                  <input name="name" type="text" class="form-control" placeholder="Your name" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Email</label>
+                  <input name="email" type="email" class="form-control" value="slametwibowo1922@gmail.com" required>
+                </div>
+                <div class="col-12">
+                  <label class="form-label">Message</label>
+                  <textarea name="message" rows="4" class="form-control" placeholder="Hi, let's build something!" required></textarea>
+                </div>
+                <div class="col-12 d-flex gap-2">
+                  <button class="btn btn-primary btn-soft px-4" type="submit">Send</button>
+                  <a class="btn btn-outline-secondary btn-soft" href="mailto:slametwibowo1922@gmail.com">Email</a>
+                  <a class="btn btn-outline-secondary btn-soft" href="https://t.me/jodohsaya" target="_blank" rel="noopener"><i class="bi bi-telegram me-1"></i>@jodohsaya</a>
+                </div>
+              </div>
+            </form>
+            <p class="small muted mt-3">Prefer DM? Telegram: <a href="https://t.me/jodohsaya" target="_blank" rel="noopener">@jodohsaya</a></p>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <div class="glass p-4 h-100" data-tilt data-tilt-max="6">
+            <h6 class="text-uppercase text-muted small mb-3">Quick Links</h6>
+            <ul class="list-unstyled mb-0">
+              <li class="mb-2"><i class="bi bi-github me-2"></i><a href="https://github.com/Semutireng22" target="_blank" rel="noopener">GitHub</a></li>
+              <li class="mb-2"><i class="bi bi-box-arrow-up-right me-2"></i><a href="https://monflipcoin.vercel.app/" target="_blank" rel="noopener">Monflipcoin</a></li>
+              <li class="mb-2"><i class="bi bi-box-arrow-up-right me-2"></i><a href="https://monracer.vercel.app/" target="_blank" rel="noopener">Monracer</a></li>
+              <li class="mb-2"><i class="bi bi-git me-2"></i><a href="https://github.com/Semutireng22/mcp-monad" target="_blank" rel="noopener">Monad MCP</a></li>
+              <li class="mb-2"><i class="bi bi-git me-2"></i><a href="https://github.com/Semutireng22/grass-minning" target="_blank" rel="noopener">Grass Mining</a></li>
+              <li class="mb-2"><i class="bi bi-box-arrow-up-right me-2"></i><a href="https://www.npmjs.com/package/ethereumos?activeTab=code" target="_blank" rel="noopener">Ethereum OS CLI (npm)</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container d-flex flex-column flex-md-row align-items-center justify-content-between gap-2">
+      <div class="small muted">© <span id="y"></span> Slamet Wibowo. All rights reserved.</div>
+      <div class="d-flex align-items-center gap-3">
+        <a href="#top" class="small">Back to top</a>
+        <div class="small muted">Built with Bootstrap · Swiper · GSAP · Lenis</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JS libs -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/bundled/lenis.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js" defer></script>
+
+  <script>
+    // Year + Theme toggle
+    document.addEventListener('DOMContentLoaded',()=>{
+      document.getElementById('y').textContent = new Date().getFullYear();
+      const root = document.documentElement, key='theme';
+      const setT=t=>root.setAttribute('data-bs-theme',t);
+      setT(localStorage.getItem(key) || (matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));
+      document.getElementById('themeToggle').addEventListener('click',()=>{
+        const next = root.getAttribute('data-bs-theme')==='dark'?'light':'dark';
+        setT(next); localStorage.setItem(key,next);
+      });
+    });
+
+    // Lenis smooth scroll (no CSS smooth to avoid jitter)
+    window.addEventListener('load', ()=>{
+      if (window.Lenis){
+        const lenis = new Lenis({ duration: 1.05, smoothWheel: true });
+        function raf(t){ lenis.raf(t); requestAnimationFrame(raf); } requestAnimationFrame(raf);
+      }
+    });
+
+    // Typing effect for intro
+    window.addEventListener('load', ()=>{
+      const target = document.getElementById('typed');
+      const text = "Hi, I am Slamet Wibowo";
+      let i=0, speed = 55;
+      function type(){ if(i<=text.length){ target.textContent = text.slice(0,i); i++; setTimeout(type, speed);} else { target.classList.remove('typing'); } }
+      type();
+    });
+
+    // GSAP animations
+    window.addEventListener('load', ()=>{
+      if (window.gsap && window.ScrollTrigger){
+        gsap.from('.section-title',{ y:24, opacity:0, duration:.7, ease:'power2.out', stagger:.15,
+          scrollTrigger:{ trigger:'.section', start:'top 78%' }});
+      }
+    });
+
+    // Skills infographic animation
+    window.addEventListener('load', ()=>{
+      const nums = document.querySelectorAll('#skills .num');
+      const bars = document.querySelectorAll('#skills .progress-bar');
+
+      function animateSkills(){
+        nums.forEach((n,idx)=>{
+          const target = +n.dataset.target;
+          const bar = bars[idx];
+          let cur = 0;
+          const step = () => { cur += Math.ceil(target/40); if(cur>target) cur=target; n.textContent = cur; if(cur<target) requestAnimationFrame(step); };
+          requestAnimationFrame(step);
+          bar.style.transition = 'width 1.2s cubic-bezier(.2,.8,.2,1)';
+          requestAnimationFrame(()=> bar.style.width = target + '%');
+        });
+      }
+
+      if (window.ScrollTrigger){
+        ScrollTrigger.create({ trigger: '#skills', start: 'top 80%', once: true, onEnter: animateSkills });
+      } else { setTimeout(animateSkills, 600); }
+    });
+
+    // Swiper Work slider (3D coverflow + keyboard + mousewheel)
+    window.addEventListener('load', ()=>{
+      if (typeof Swiper !== 'undefined'){
+        new Swiper('.work-swiper',{
+          effect:'coverflow',
+          grabCursor:true,
+          centeredSlides:true,
+          loop:false,
+          keyboard:{ enabled:true },
+          mousewheel:{ forceToAxis:true, sensitivity:0.8 },
+          coverflowEffect:{ rotate:16, stretch:0, depth:140, modifier:1, slideShadows:false },
+          slidesPerView: 1.05,
+          spaceBetween: 14,
+          breakpoints:{
+            576:{ slidesPerView:1.2, spaceBetween:16 },
+            768:{ slidesPerView:1.7, spaceBetween:18 },
+            992:{ slidesPerView:2.4, spaceBetween:20 },
+            1200:{ slidesPerView:3.1, spaceBetween:22 }
+          },
+          pagination:{ el:'.work-swiper .swiper-pagination', clickable:true },
+          scrollbar:{ el:'.work-swiper .swiper-scrollbar', draggable:true }
+        });
+      }
+    });
+
+    // VanillaTilt 3D
+    window.addEventListener('load', ()=>{
+      if (window.VanillaTilt){
+        VanillaTilt.init(document.querySelectorAll('[data-tilt]'),{
+          max: 10, speed: 600, glare:true, 'max-glare': .18, gyroscope: true, perspective: 1200
+        });
+      }
+    });
+  </script>
+</body>
+  </html>                <span class="badge rounded-pill badge-soft">Monad</span>
               </div>
               <p class="card-text muted">Coinflip dApp on Monad Testnet with smart contract integration.</p>
               <div class="d-flex gap-2">
